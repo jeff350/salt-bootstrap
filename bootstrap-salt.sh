@@ -4119,7 +4119,11 @@ __install_saltstack_rhel_repository() {
     # Avoid using '$releasever' variable for yum.
     # Instead, this should work correctly on all RHEL variants.
     base_url="${HTTP_VAL}://${_REPO_URL}/${__PY_VERSION_REPO}/redhat/${DISTRO_MAJOR_VERSION}/\$basearch/${repo_rev}/"
-    gpg_key="SALTSTACK-GPG-KEY.pub"
+    if [ "${DISTRO_MAJOR_VERSION}" -eq 7 ]; then
+        gpg_key="${base_url}SALTSTACK-GPG-KEY.pub","${base_url}base/RPM-GPG-KEY-CentOS-7"
+    else
+        gpg_key="${base_url}SALTSTACK-GPG-KEY.pub"
+    fi
     repo_file="/etc/yum.repos.d/saltstack.repo"
 
     if [ ! -s "$repo_file" ] || [ "$_FORCE_OVERWRITE" -eq $BS_TRUE ]; then
@@ -4129,7 +4133,7 @@ name=SaltStack ${repo_rev} Release Channel for RHEL/CentOS \$releasever
 baseurl=${base_url}
 skip_if_unavailable=True
 gpgcheck=1
-gpgkey=${base_url}${gpg_key}
+gpgkey=${gpg_key}
 enabled=1
 enabled_metadata=1
 _eof
