@@ -4138,8 +4138,12 @@ enabled=1
 enabled_metadata=1
 _eof
 
-        fetch_url="${HTTP_VAL}://${_REPO_URL}/${__PY_VERSION_REPO}/redhat/${DISTRO_MAJOR_VERSION}/${CPU_ARCH_L}/${repo_rev}/"
-        __rpm_import_gpg "${fetch_url}${gpg_key}" || return 1
+	Field_Separator=$IFS
+	IFS=,
+	for key in $gpg_key; do
+            __rpm_import_gpg "$key" || return 1
+        done
+	IFS=$Field_Separator
         yum clean metadata || return 1
     elif [ "$repo_rev" != "latest" ]; then
         echowarn "saltstack.repo already exists, ignoring salt version argument."
