@@ -57,6 +57,14 @@ platforms:
   - name: centos-7
     driver_config:
       run_command: /usr/lib/systemd/systemd
+  - name: rhel-8-ubi
+    driver_config:
+      image: registry.access.redhat.com/ubi8
+      run_command: /usr/lib/systemd/systemd
+  - name: rhel-7-ubi
+    driver_config:
+      image: registry.access.redhat.com/ubi7
+      run_command: /usr/lib/systemd/systemd
   - name: debian-9
     driver_config:
       run_command: /lib/systemd/systemd
@@ -121,6 +129,8 @@ suites:
       - debian-11
       - gentoo
       - gentoo-systemd
+      - rhel-7-ubi
+      - rhel-8-ubi
   - name: py2-git-3000
     provisioner:
       salt_version: 3000
@@ -129,6 +139,8 @@ suites:
       - debian-11
       - gentoo
       - gentoo-systemd
+      - rhel-7-ubi
+      - rhel-8-ubi
   - name: py2-git-master
     provisioner:
       salt_version: master
@@ -137,6 +149,8 @@ suites:
       - debian-11
       - gentoo
       - gentoo-systemd
+      - rhel-7-ubi
+      - rhel-8-ubi
   - name: py2-stable-2019-2
     provisioner:
       salt_version: 2019.2
@@ -151,6 +165,8 @@ suites:
       - gentoo
       - gentoo-systemd
       - ubuntu-2004
+      - rhel-7-ubi
+      - rhel-8-ubi
   - name: py2-stable-3000
     provisioner:
       salt_version: 3000
@@ -165,7 +181,8 @@ suites:
       - gentoo
       - gentoo-systemd
       - ubuntu-2004
-
+      - rhel-7-ubi
+      - rhel-8-ubi
   - name: py3-git-3000
     provisioner:
       salt_version: 3000
