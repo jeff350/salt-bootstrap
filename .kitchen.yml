@@ -155,7 +155,6 @@ suites:
       - gentoo
       - gentoo-systemd
       - ubuntu-2004
-
   - name: py3-git-3000
     provisioner:
       salt_version: 3000
